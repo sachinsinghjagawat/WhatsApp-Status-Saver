@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WhatsApp Status</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">Images</string>
+    <string name="tab_text_2">Videos</string>
+    <string name="tab_text_3">Saved</string>
+</resources>
