@@ -1,4 +1,4 @@
-package com.example.whatsappstatussaver
+package com.sachinsinghjagawat.whatsappstatussaver
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE

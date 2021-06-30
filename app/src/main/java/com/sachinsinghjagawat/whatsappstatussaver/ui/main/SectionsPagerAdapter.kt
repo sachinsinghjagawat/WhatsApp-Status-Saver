@@ -1,10 +1,10 @@
-package com.example.whatsappstatussaver.ui.main
+package com.sachinsinghjagawat.whatsappstatussaver.ui.main
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.whatsappstatussaver.R
+import com.sachinsinghjagawat.whatsappstatussaver.R
 
 private val TAB_TITLES = arrayOf(
         R.string.tab_text_1,

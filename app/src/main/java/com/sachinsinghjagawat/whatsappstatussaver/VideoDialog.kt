@@ -1,4 +1,4 @@
-package com.example.whatsappstatussaver
+package com.sachinsinghjagawat.whatsappstatussaver
 
 import android.content.Context
 import android.content.Intent

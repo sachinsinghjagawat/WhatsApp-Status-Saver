@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
@@ -21,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_share_24"
+            app:tint="@color/white"
             android:backgroundTint="#E91E63"
             android:layout_margin="20dp"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -28,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_save_alt_24"
+            app:tint="@color/white"
             android:backgroundTint="#9C27B0"
             android:layout_margin="20dp"/>
 

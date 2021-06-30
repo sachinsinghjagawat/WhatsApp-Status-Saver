@@ -1,18 +1,12 @@
-package com.example.whatsappstatussaver
+package com.sachinsinghjagawat.whatsappstatussaver
 
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import com.example.whatsappstatussaver.ui.main.SectionsPagerAdapter
-import com.example.whatsappstatussaver.databinding.ActivityMain2Binding
+import com.sachinsinghjagawat.whatsappstatussaver.ui.main.SectionsPagerAdapter
+import com.sachinsinghjagawat.whatsappstatussaver.databinding.ActivityMain2Binding
 import java.io.File
 
 class MainActivity2 : AppCompatActivity() {
