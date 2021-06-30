@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -17,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.whatsappstatussaver.MainActivity2
 import com.example.whatsappstatussaver.R
+import com.example.whatsappstatussaver.VideoDialog
 import java.io.File
 
 
@@ -41,8 +43,8 @@ class PlaceholderFragment : Fragment() {
         else if (tabno==2) list= MainActivity2.list2
         else if (tabno==3) list= MainActivity2.list3
         else list= MainActivity2.list1
-
-        var st= StatusAdapter(list, requireContext());
+        var f = fragmentManager
+        var st= f?.let { StatusAdapter(list, requireContext(), it) };
         var sglm= StaggeredGridLayoutManager (NUM_OF_COLUMNS, LinearLayoutManager.VERTICAL)
         recyclerView.setItemViewCacheSize(200);
         recyclerView.setDrawingCacheEnabled(true);
@@ -65,7 +67,7 @@ class PlaceholderFragment : Fragment() {
             }
         }
     }
-    class StatusAdapter (var list: ArrayList<String>, var context: Context) : RecyclerView.Adapter <StatusAdapter.MyViewHolder>() {
+    class StatusAdapter (var list: ArrayList<String>, var context: Context, var fragmentManager: FragmentManager) : RecyclerView.Adapter <StatusAdapter.MyViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val itemView = LayoutInflater.from(parent.context)
@@ -77,33 +79,17 @@ class PlaceholderFragment : Fragment() {
             var path = list[position]
             var rq = RequestOptions ().placeholder(R.drawable.sample_image);
             var uri = Uri.fromFile(File(path));
-            var w= holder.imageView.width
-//            val ratio: Float = item.getHeight() / item.getWidth()
-//            holder.imageView.minimumHeight= (ratio * w).toInt();
             Glide.with(context).load(uri).apply(rq)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .crossFade()
                 .into(holder.imageView)
-//            val set = ConstraintSet()
-//            val ratio =String.format("%d:%d", uri.width,poster.height)
-//            set.clone(holder.mConstraintLayout)
-//            set.setDimensionRatio(holder.mImgPoster.id, ratio)
-//            set.applyTo(holder.mConstraintLayout)
+            holder.imageView.setOnClickListener(View.OnClickListener {
+                var vd = VideoDialog (path, context)
+                vd.show( fragmentManager , "TAG")
+            })
         }
 
         override fun getItemCount(): Int {
             return list.size
-        }
-
-        fun share (path : String){
-            val shareIntent = Intent(Intent.ACTION_SEND)
-
-            shareIntent.type = "image/jpg"
-            shareIntent.putExtra(
-                Intent.EXTRA_STREAM,
-                Uri.parse("file://" + path)
-            )
-            context.startActivity(Intent.createChooser(shareIntent, "Share image"))
         }
 
         class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

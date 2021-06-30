@@ -43,17 +43,23 @@ class MainActivity2 : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = binding.fab
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
     }
+
+    override fun onResume() {
+        super.onResume()
+        list1.clear()
+        list2.clear()
+        list3.clear()
+
+        setfragment(1)
+        setfragment(2)
+        setfragment(3)
+    }
+
     fun setfragment (tabno:Int){
         var rootpath = Environment.getExternalStorageDirectory().absolutePath;
         if (tabno==3){
-            execute(rootpath + "/Pictures/Instagram/", tabno)
+            execute(rootpath + "/Download/MyStorySaver/WhatsApp/", tabno)
             return;
         }
         if (File(rootpath+ OLD_INITIAL_PATH).exists()) {
@@ -66,7 +72,7 @@ class MainActivity2 : AppCompatActivity() {
     fun execute (pathname: String, tabno: Int){
         File (pathname).walk().forEach {
             var path: String = it.toString();
-            Log.i("Sachin Bhai= ", path);
+//            Log.i("Sachin Bhai= ", path);
             if (tabno==1){
                 if(path.endsWith("jpg")) list1.add(it.toString());
             }else if (tabno==2) {
