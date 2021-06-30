@@ -1,10 +1,9 @@
 package com.example.whatsappstatussaver.ui.main
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.whatsappstatussaver.MainActivity2
 import com.example.whatsappstatussaver.R
 import java.io.File
+
 
 class PlaceholderFragment : Fragment() {
 
@@ -38,12 +38,15 @@ class PlaceholderFragment : Fragment() {
         var tabno= arguments?.getInt(ARG_SECTION_NUMBER)?:1;
         var list : ArrayList<String>
         if (tabno==1) list= MainActivity2.list1
-        if (tabno==2) list= MainActivity2.list2
-        if (tabno==3) list= MainActivity2.list3
+        else if (tabno==2) list= MainActivity2.list2
+        else if (tabno==3) list= MainActivity2.list3
         else list= MainActivity2.list1
 
         var st= StatusAdapter(list, requireContext());
         var sglm= StaggeredGridLayoutManager (NUM_OF_COLUMNS, LinearLayoutManager.VERTICAL)
+        recyclerView.setItemViewCacheSize(200);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager= sglm
         recyclerView.adapter= st;
@@ -74,11 +77,33 @@ class PlaceholderFragment : Fragment() {
             var path = list[position]
             var rq = RequestOptions ().placeholder(R.drawable.sample_image);
             var uri = Uri.fromFile(File(path));
-            Glide.with(context).load(uri).apply(rq).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imageView)
+            var w= holder.imageView.width
+//            val ratio: Float = item.getHeight() / item.getWidth()
+//            holder.imageView.minimumHeight= (ratio * w).toInt();
+            Glide.with(context).load(uri).apply(rq)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .crossFade()
+                .into(holder.imageView)
+//            val set = ConstraintSet()
+//            val ratio =String.format("%d:%d", uri.width,poster.height)
+//            set.clone(holder.mConstraintLayout)
+//            set.setDimensionRatio(holder.mImgPoster.id, ratio)
+//            set.applyTo(holder.mConstraintLayout)
         }
 
         override fun getItemCount(): Int {
             return list.size
+        }
+
+        fun share (path : String){
+            val shareIntent = Intent(Intent.ACTION_SEND)
+
+            shareIntent.type = "image/jpg"
+            shareIntent.putExtra(
+                Intent.EXTRA_STREAM,
+                Uri.parse("file://" + path)
+            )
+            context.startActivity(Intent.createChooser(shareIntent, "Share image"))
         }
 
         class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

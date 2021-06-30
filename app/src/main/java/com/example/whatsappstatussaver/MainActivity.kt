@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.Settings
 import android.view.View
 import androidx.annotation.RequiresApi
@@ -20,6 +21,8 @@ import org.jetbrains.annotations.Nullable
 
 
 class MainActivity : AppCompatActivity() {
+
+    val WAITING_TIME:Int= 3000;
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +33,11 @@ class MainActivity : AppCompatActivity() {
         if (!checkPermission()){
             showPermissionDialog()
         }else{
-            intent = Intent (this, MainActivity2::class.java)
-            startActivity(intent);
+            Handler().postDelayed(Runnable { /* Create an Intent that will start the Menu-Activity. */
+                intent = Intent (this, MainActivity2::class.java)
+                startActivity(intent);
+                this@MainActivity.finish()
+            }, WAITING_TIME.toLong())
         }
 
     }
@@ -43,8 +49,11 @@ class MainActivity : AppCompatActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    intent = Intent (this, MainActivity2::class.java)
-                    startActivity(intent);
+                    Handler().postDelayed(Runnable { /* Create an Intent that will start the Menu-Activity. */
+                        intent = Intent (this, MainActivity2::class.java)
+                        startActivity(intent);
+                        this@MainActivity.finish()
+                    }, WAITING_TIME.toLong())
                 } else {
                     var sn= Snackbar.make(findViewById(android.R.id.content), "Premission Denied!! Click here to give permission", Snackbar.LENGTH_INDEFINITE)
                     sn.setAction("Click Here", View.OnClickListener {

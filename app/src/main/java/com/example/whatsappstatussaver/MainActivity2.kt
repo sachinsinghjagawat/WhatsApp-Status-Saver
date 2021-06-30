@@ -34,16 +34,9 @@ class MainActivity2 : AppCompatActivity() {
      binding = ActivityMain2Binding.inflate(layoutInflater)
      setContentView(binding.root)
 
-//        window.decorView.systemUiVisibility= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-//        actionBar?.hide();
         setfragment(1)
         setfragment(2)
         setfragment(3)
-        var bundle = Bundle()
-        bundle.putStringArrayList("1", list1)
-        bundle.putStringArrayList("2", list2)
-        bundle.putStringArrayList("3", list3)
-
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = binding.viewPager
@@ -58,12 +51,10 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
     fun setfragment (tabno:Int){
-        list1.clear()
-        list2.clear()
-        list3.clear()
         var rootpath = Environment.getExternalStorageDirectory().absolutePath;
         if (tabno==3){
-            execute(rootpath + "/Phone storage/Pictures/Instagram/", tabno)
+            execute(rootpath + "/Pictures/Instagram/", tabno)
+            return;
         }
         if (File(rootpath+ OLD_INITIAL_PATH).exists()) {
             execute(rootpath + OLD_INITIAL_PATH, tabno);
@@ -81,7 +72,7 @@ class MainActivity2 : AppCompatActivity() {
             }else if (tabno==2) {
                 if(path.endsWith("mp4")) list2.add(it.toString());
             }else if (tabno==3){
-                list3.add(it.toString());
+                if(path.endsWith("jpg") || path.endsWith("mp4"))list3.add(it.toString());
             }
         }
     }
