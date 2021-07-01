@@ -22,7 +22,6 @@ import org.jetbrains.annotations.Nullable
 
 class MainActivity : AppCompatActivity() {
 
-    val WAITING_TIME:Int= 3000;
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 intent = Intent (this, MainActivity2::class.java)
                 startActivity(intent);
                 this@MainActivity.finish()
-            }, WAITING_TIME.toLong())
+            }, 2500)
         }
 
     }
@@ -46,14 +45,13 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             1234 -> {
-                // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() &&
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Handler().postDelayed(Runnable { /* Create an Intent that will start the Menu-Activity. */
                         intent = Intent (this, MainActivity2::class.java)
                         startActivity(intent);
                         this@MainActivity.finish()
-                    }, WAITING_TIME.toLong())
+                    }, 2500)
                 } else {
                     var sn= Snackbar.make(findViewById(android.R.id.content), "Premission Denied!! Click here to give permission", Snackbar.LENGTH_INDEFINITE)
                     sn.setAction("Click Here", View.OnClickListener {

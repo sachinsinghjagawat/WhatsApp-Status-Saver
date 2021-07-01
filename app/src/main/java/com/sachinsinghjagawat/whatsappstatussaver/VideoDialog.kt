@@ -60,24 +60,18 @@ class VideoDialog (var path :String, context: Context) : BottomSheetDialogFragme
             type = "image/jpg"
             else type= "video/mp4"
         }
-//        shareIntent.type = "image/jpg"
-//        shareIntent.putExtra(
-//            Intent.EXTRA_STREAM,
-//            Uri.parse("file://" + path)
-//        )
         startActivity(Intent.createChooser(shareIntent, "Share image"))
-//        contex.startActivity(Intent.createChooser(shareIntent, "Share image"))
     }
     fun save (path :String){
         var rootpath = Environment.getExternalStorageDirectory().absolutePath;
         rootpath += "/Download/MyStorySaver/WhatsApp"
         if (!File(rootpath).exists()){
             File(rootpath).mkdirs()
-            Log.i("Sachin problem= " , "hi");
         }
         try {
             FileUtils.copyFileToDirectory(File(path), File(rootpath))
             Toast.makeText(contex, "File Saved Successfull :)" , Toast.LENGTH_SHORT).show()
+            MainActivity2.updatelist3()
         }catch (e: IOException){
             e.printStackTrace()
             Toast.makeText(contex, "File Not Saved :(" , Toast.LENGTH_SHORT).show()

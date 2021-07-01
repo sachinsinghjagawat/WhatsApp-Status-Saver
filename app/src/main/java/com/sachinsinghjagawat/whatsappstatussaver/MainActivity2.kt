@@ -13,13 +13,28 @@ class MainActivity2 : AppCompatActivity() {
 
     private lateinit var binding: ActivityMain2Binding
 
+    val OLD_INITIAL_PATH= "/WhatsApp/Media/.Statuses"
+    val NEW_INITIAL_PATH= "/Android/media/com.whatsapp/WhatsApp/Media/.Statuses/"
+
     companion object {
         var list1 = arrayListOf<String>();
         var list2 = arrayListOf<String>();
+
         var list3 = arrayListOf<String>();
+        fun updatelist3 (){
+            list3.clear()
+            resetlist3();
+        }
+
+        private fun resetlist3() {
+            var rootpath = Environment.getExternalStorageDirectory().absolutePath;
+            rootpath += "/Download/MyStorySaver/WhatsApp/"
+            File (rootpath).walk().forEach {
+                var path: String = it.toString();
+                if(path.endsWith("jpg") || path.endsWith("mp4"))list3.add(it.toString());
+            }
+        }
     }
-    val OLD_INITIAL_PATH= "/WhatsApp/Media/.Statuses"
-    val NEW_INITIAL_PATH= "/Android/media/com.whatsapp/WhatsApp/Media/.Statuses/"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +90,25 @@ class MainActivity2 : AppCompatActivity() {
                 if(path.endsWith("jpg") || path.endsWith("mp4"))list3.add(it.toString());
             }
         }
+//        var fl : Array<out File>? = File (pathname).listFiles();
+//        if (fl != null) {
+//            fl.sortByDescending {
+//                it.lastModified()
+//            }
+//        }
+//        if (fl != null) {
+//            fl.forEach {
+//                var path: String = it.toString();
+//    //            Log.i("Sachin Bhai= ", path);
+//                if (tabno==1){
+//                    if(path.endsWith("jpg")) list1.add(it.toString());
+//                }else if (tabno==2) {
+//                    if(path.endsWith("mp4")) list2.add(it.toString());
+//                }else if (tabno==3){
+//                    if(path.endsWith("jpg") || path.endsWith("mp4"))list3.add(it.toString());
+//                }
+//            }
+//        }
     }
     fun  getlist1 (): ArrayList <String> {
         return list1
