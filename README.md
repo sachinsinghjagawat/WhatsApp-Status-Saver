@@ -12,8 +12,9 @@ Then this App is perfect for you. 😃
 
 The Status gets Instantly saved to your Gallery! 😉
 
-The App shows you Statuses from WhatsApp, With a beautiful UI 😍that allows you to navigate through the statuses easily 
-Features:
+The App shows you Statuses from WhatsApp, With a beautiful UI 😍that allows you to navigate through the statuses easily. 
+
+**Features:**
 * Save any Whatsapp status
 * Easy Share without Saving,
 * Easy & Fast Saving,
