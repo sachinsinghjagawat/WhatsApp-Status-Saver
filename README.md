@@ -28,6 +28,8 @@ Go get the App & start Saving Statuses! 😃
 Hey wait,
 Don't forget to leave your feedback and Suggestion! 😀😁
 
+<a href='https://play.google.com/store/apps/details?id=com.sachinsinghjagawat.statussaver&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height= 100px src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
 **Disclaimer:**
 This App is not the Actual WhatsApp provided by Facebook. The UI has been made similar to make Users feel comfortable with this App. This App uses your internal storage to show you WhatsApp Status Images. We don't upload any of your data on our server. This App does not contain ads right now, but we will put ads in the future to keep this project running.
 
